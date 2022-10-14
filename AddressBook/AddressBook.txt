@@ -1,0 +1,35 @@
+create database AddressBookService;
+use AddressBookService;
+create table AddressBookTable(id int auto_increment, firstName varchar(20), lastName varchar(20), address varchar(30), city varchar(15),state varchar(20), zip varchar(6), phone_number varchar(10), email varchar(30), primary key(id));
+desc AddressBookTable;
+insert into AddressBookTable(firstName, lastName, address, city, state, zip, phone_number, email) values
+("Abhishek","Sagar","BEL lAyout","Bangalore","Karnataka","560091","9066939699","sagarabhishek81@gmail.com"),
+("Sagar","Abhishek","kamanur","Kolar","karnataka","563101","7019696187","abhisheksagar1403@gmail.com");
+select * from AddressBookTable;
+update AddressBookTable set address="north" where firstName="Abhishek";
+select * from AddressBookTable;
+delete from AddressBookTable where firstName="Sagar";
+select * from AddressBookTable;
+insert into AddressBookTable values ("Abhi","Sagar","kamanur","Kolar","karnataka","563101","7019696187","abhisheksagar1403@gmail.com");
+select * from AddressBookTable;
+select * from AddressBookTable where city="Kolar";
+select * from AddressBookTable where state="Karnataka";
+select count(firstName) from AddressBookTable where city="kolar";
+select count(firstName) from AddressBookTable where city="kolar" or state="Karnataka";
+insert into AddressBookTable values ("Abbi","Sag","kolar","Kolar","karnataka","563101","7019696187","abhisheksagar1403@gmail.com");
+select * from AddressBookTable;
+select * from AddressBookTable where city="kolar" order by firstName ;
+alter table AddressBookTable add addressBook_name varchar(15);
+alter table AddressBookTable add booktype varchar(10);
+select * from AddressBookTable;
+update AddressBookTable set addressBook_name="AbhishekBook", booktype="family" where firstName="Abhishek"; 
+update AddressBookTable set addressBook_name="AbhiBook", booktype="friends"  where firstName="Abhi"; 
+update AddressBookTable set addressBook_name="Abbiook", booktype="family"  where firstName="Abbi"; 
+select count(*) from AddressBookTable where booktype="family";
+create table family(id int auto_increment, firstName varchar(20), lastName varchar(20), address varchar(30), city varchar(15),state varchar(20), zip varchar(6), phone_number varchar(10), email varchar(30),addressBook_name varchar(15), booktype varchar(10),primary key(id),foreign key (id) references addressbooktable (id));
+insert into family select * from AddressBookTable where booktype="family";
+select * from family;
+select * from AddressBookTable;
+create table friends(id int auto_increment, firstName varchar(20), lastName varchar(20), address varchar(30), city varchar(15),state varchar(20), zip varchar(6), phone_number varchar(10), email varchar(30),addressBook_name varchar(15), booktype varchar(10),primary key(id),foreign key (id) references addressbooktable (id));
+insert into friends select * from AddressBookTable where booktype="friends";
+select * from friends;
